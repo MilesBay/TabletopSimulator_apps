@@ -7,6 +7,8 @@ rim, next to their nameplate. The counter is tinted to their seat colour and
 labelled with their Steam name. Empty seats get no counter, and a counter is
 removed when its player leaves.
 
+![](result.png)
+
 ---
 
 ## What it does
