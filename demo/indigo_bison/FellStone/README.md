@@ -1,5 +1,5 @@
 
-# component to lay out card grid
+# demo of The Dungeon of FellStone 10/09/2026
 
 ![](result.png)
 
