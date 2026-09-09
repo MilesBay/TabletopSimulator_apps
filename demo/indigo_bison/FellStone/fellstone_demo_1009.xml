@@ -1,0 +1,40 @@
+<!--
+  The Dungeon of Fellstone — control panel
+  Paste into: Tabletop Simulator → Scripting → XML tab
+
+  onClick on a Global UI element defaults to the Global Lua script, so these
+  names must match the function names in fellstone_global.lua.
+-->
+
+<Panel id="fellstonePanel"
+       rectAlignment="UpperRight"
+       width="240" height="230"
+       offsetXY="-20 -20"
+       color="#000000A0">
+
+  <VerticalLayout padding="12 12 12 12" spacing="8">
+
+    <Text fontSize="15" color="#FFFFFF" alignment="MiddleCenter">Fellstone</Text>
+
+    <Text id="fellstoneStatus"
+          fontSize="12"
+          color="#B8B8C0"
+          alignment="MiddleCenter">Loading</Text>
+
+    <Button onClick="buildTable"
+            color="#2A2A30"
+            textColor="#FFFFFF"
+            fontSize="14">Build / Rebuild</Button>
+
+    <Button onClick="revealCombat"
+            color="#1A2A3A"
+            textColor="#FFFFFF"
+            fontSize="14">Reveal Combat</Button>
+
+    <Button onClick="clearTable"
+            color="#3A1A1A"
+            textColor="#FFFFFF"
+            fontSize="14">Clear Table</Button>
+
+  </VerticalLayout>
+</Panel>
