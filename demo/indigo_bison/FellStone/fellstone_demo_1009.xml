@@ -1,40 +1,107 @@
 <!--
-  The Dungeon of Fellstone — control panel
-  Paste into: Tabletop Simulator → Scripting → XML tab
+  The Dungeon of Fellstone - control panel
+  Paste into: Tabletop Simulator -> Scripting -> XML tab
 
   onClick on a Global UI element defaults to the Global Lua script, so these
-  names must match the function names in fellstone_global.lua.
+  names must match the function names in fellstone_1109.lua:
+    buildTable  startGame  endTurnButton  forceResolve  clearTable  toggleReference
 -->
+
+<Defaults>
+  <Button color="#2A2A30" textColor="#FFFFFF" fontSize="14" />
+  <Text fontSize="12" color="#C8C8D2" alignment="MiddleLeft" />
+</Defaults>
+
+<!-- ===================== control panel ===================== -->
 
 <Panel id="fellstonePanel"
        rectAlignment="UpperRight"
-       width="240" height="230"
+       width="250" height="330"
        offsetXY="-20 -20"
        color="#000000A0">
 
-  <VerticalLayout padding="12 12 12 12" spacing="8">
+  <VerticalLayout padding="12 12 12 12" spacing="6">
 
-    <Text fontSize="15" color="#FFFFFF" alignment="MiddleCenter">Fellstone</Text>
+    <Text fontSize="16" color="#FFFFFF" alignment="MiddleCenter">Fellstone</Text>
+
+    <Text id="fellstoneTurn"
+          fontSize="13"
+          color="#FFD98A"
+          alignment="MiddleCenter">Waiting</Text>
 
     <Text id="fellstoneStatus"
-          fontSize="12"
-          color="#B8B8C0"
+          fontSize="11"
+          color="#8E8E9A"
           alignment="MiddleCenter">Loading</Text>
 
-    <Button onClick="buildTable"
-            color="#2A2A30"
-            textColor="#FFFFFF"
-            fontSize="14">Build / Rebuild</Button>
+    <Button onClick="buildTable">Build / Rebuild</Button>
 
-    <Button onClick="revealCombat"
-            color="#1A2A3A"
-            textColor="#FFFFFF"
-            fontSize="14">Reveal Combat</Button>
+    <Button onClick="startGame" color="#1A3A22">Start Game</Button>
 
-    <Button onClick="clearTable"
-            color="#3A1A1A"
-            textColor="#FFFFFF"
-            fontSize="14">Clear Table</Button>
+    <Button onClick="endTurnButton" color="#1A2A3A">End Turn</Button>
+
+    <Button onClick="forceResolve" color="#2A2438">Resolve Combat</Button>
+
+    <Button onClick="toggleReference" color="#26262C">Card Reference</Button>
+
+    <Button onClick="clearTable" color="#3A1A1A">Clear Table</Button>
+
+  </VerticalLayout>
+</Panel>
+
+<!-- ===================== card reference ===================== -->
+<!--
+  Hidden until someone presses Card Reference. toggleReference() flips the
+  active attribute, so this panel costs nothing while it is closed.
+-->
+
+<Panel id="fellstoneReference"
+       active="false"
+       rectAlignment="MiddleCenter"
+       width="620" height="560"
+       color="#0C0C10F0"
+       outlineSize="1 1"
+       outline="#3A3A46">
+
+  <VerticalLayout padding="18 18 14 14" spacing="4">
+
+    <Text fontSize="18" color="#FFFFFF" alignment="MiddleCenter">The Dungeon of Fellstone</Text>
+    <Text fontSize="11" color="#8E8E9A" alignment="MiddleCenter">Move up to 3 cells, then the tile you land on resolves</Text>
+
+    <Text fontSize="14" color="#FFD98A">Dungeon tiles (49 on the board, 29 in the draw pile)</Text>
+    <Text>Room - nothing happens.</Text>
+    <Text>Rest - stop here and refresh your hand. The tile is then discarded.</Text>
+    <Text>Fellstone Wraith - Power 2 to 5. Play one combat card; ties go to you.</Text>
+    <Text color="#9A9AA6">Beat it and it joins your hand as a combat card of that power. Lose and you take 1 damage, and it stays face up for the next player.</Text>
+
+    <Text fontSize="14" color="#FFD98A">Traps</Text>
+    <Text>Pickpocket - steal a random card from another player's hand.</Text>
+    <Text>Cache - put a random card from your hand under this tile.</Text>
+    <Text>Snare - your next turn is skipped.</Text>
+    <Text>Wellspring - refresh your hand.</Text>
+    <Text>Collapse - every face-up tile within 3 cells is shuffled back and redealt face down, this one included.</Text>
+    <Text>Displacement - swap positions with another player.</Text>
+
+    <Text fontSize="14" color="#FF9A9A">Mage</Text>
+    <Text>1 Dodge - you lose no health this combat.</Text>
+    <Text>2 Counterspell - your opponent's ability does not resolve.</Text>
+    <Text>3 Hidden Blade - becomes Power 6 if your opponent's power is 4 or more.</Text>
+    <Text>4 Thunder Slash - +1 power per face-up monster tile adjacent to you.</Text>
+    <Text>5 Fireball - if you win, your opponent loses 2 health.</Text>
+
+    <Text fontSize="14" color="#FF9A9A">Paladin</Text>
+    <Text>1 Dodge - you lose no health this combat.</Text>
+    <Text>2 Defensive Stance - you win ties.</Text>
+    <Text>3 Hidden Blade - becomes Power 6 if your opponent's power is 4 or more.</Text>
+    <Text>4 Riposte - if you lose, your opponent also loses 1 health.</Text>
+    <Text>5 Authority - if you win, steal a random card from your opponent's hand.</Text>
+
+    <Text fontSize="14" color="#FFD98A">Resolution</Text>
+    <Text>Player vs player - both cards are revealed together. The loser takes 1 damage; a tie costs both players 1 health.</Text>
+    <Text>Used cards go to your discard slot. When your hand is empty, the discard pile becomes your hand again.</Text>
+    <Text>Health starts at 4 on your d4. At 0 you are out. Last adventurer standing wins.</Text>
+
+    <Button onClick="toggleReference" color="#3A1A1A" fontSize="13">Close</Button>
 
   </VerticalLayout>
 </Panel>
